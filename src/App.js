@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {history} from './history';
+// import './App.css';
+import Container from 'muicss/lib/react/container';
+import Appbar from 'muicss/lib/react/appbar';
+import Login from './containers/Login';
+import { Router, Route } from 'react-router-dom';
+import ListAllMatches from './containers/AllMatches';
+import PrivateRoute from './components/Privateoutes';
+import GetAllLeague from './containers/GetAllLeague';
 
 class App extends Component {
   render() {
+    
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <Container fluid={true} style={{padding: 0}} >
+          <div className="App">
+            <Appbar color="primary">
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td className="mui--appbar-height mui--text-title" style={{paddingLeft: '15px'}}>Welcome To LeagueX</td>
+                </tr>
+              </tbody>
+            </table>
+            </Appbar>
+            <Router history={history}>
+              <div>
+                  <PrivateRoute exact path="/" component={ListAllMatches} />
+                  <Route path="/AllMacthesList" component={ListAllMatches} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/AllLeagues" component={GetAllLeague}/>
+              </div>
+            </Router>
+          </div>
+        </Container>
+      
+      
     );
   }
 }
